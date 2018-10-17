@@ -36,3 +36,10 @@ data BuildDetails = BuildDetails { duration :: Int, fullDisplayName :: String, r
                   deriving (Generic, Show)
 instance FromJSON BuildDetails
 
+
+data Config = Config {
+    userId :: String,
+    apiToken :: String
+    apiEndpoint :: String
+} deriving (Generic, Show)
+instance Interpret Config
