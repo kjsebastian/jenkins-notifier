@@ -29,6 +29,7 @@ dependencies:
 - bytestring
 - text
 - transformers
+- mtl
 - dhall
 
 library:

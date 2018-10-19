@@ -1,19 +1,19 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE DeriveGeneric #-}
 
-module Types 
-(
-Job(..),
-Jobs(..),
-Build(..),
-BuildDetails(..)
+module Types (
+  Job(..),
+  Jobs(..),
+  Build(..),
+  BuildDetails(..),
+  Config(..)
 ) where
 
 import Data.Aeson
 import Dhall
 import GHC.Generics
 
-data Job = Job {jobName :: String, jobUrl :: String}
+data Job = Job { jobName :: String, jobUrl :: String }
          deriving (Generic, Show)
 instance FromJSON Job where
   parseJSON = withObject "Job" $ \o -> do
@@ -32,14 +32,16 @@ instance FromJSON Build where
     url <- b .: "url"
     return $ Build number url
 
-data BuildDetails = BuildDetails { duration :: Int, fullDisplayName :: String, result :: String }
+data BuildDetails = BuildDetails { duration :: Int,
+                                   fullDisplayName :: String,
+                                   result :: String }
                   deriving (Generic, Show)
 instance FromJSON BuildDetails
 
 
 data Config = Config {
     userId :: String,
-    apiToken :: String
+    apiToken :: String,
     apiEndpoint :: String
 } deriving (Generic, Show)
 instance Interpret Config
